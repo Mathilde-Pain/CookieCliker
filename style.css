@@ -21,9 +21,9 @@ border-color: red;
 }
 tr:nth-child(odd) {background-color: skyblue;}
 tr:nth-child(even) {background-color: lightgrey;}
-td:hover {background-color: yellow;}
 #bouton2:hover { background-color: #066178; }
 #btnAscension:hover { background-color: #066178; }
+#td,tr:hover { background-color: #066178; }
 
 #bouton2 {
 color:white;
@@ -76,4 +76,14 @@ border-color: skyblue;
 font-size: 16px;
 margin: 4px 2px;
 cursor: pointer;
+}
+
+#tab2, tr, th, td {
+  font-family: MV boli;
+  border: 2px solid #066178;
+  font-size: medium; 
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  text-align: left;
+
 }

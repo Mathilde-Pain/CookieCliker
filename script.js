@@ -1,69 +1,84 @@
-var cookie= 0;
+var cookie = 0;
 var nbCookiesParClick = 1;
 var prixamelioration1 = 10;
 var nbAmelioration = 1;
 var nbSecondes = 1000;
-var nbRenaissance= 0
-var prixRenaissance1= 1000000
+var nbRenaissance = 0
+var prixRenaissance1 = 1000000
 var multiplicateur = 1
+var ameliorationsDebloquees = (nbAmelioration - 1)
 
 
-if(sessionStorage.getItem("cookie")) {
+if (sessionStorage.getItem("cookie")) {
 	cookie = parseInt(sessionStorage.getItem("cookie"));
-	updateDisplay() 
+	updateDisplay()
 }
 
-if(sessionStorage.getItem("nbAmelioration")) {
+if (sessionStorage.getItem("nbAmelioration")) {
 	nbAmelioration = parseInt(sessionStorage.getItem("nbAmelioration"));
-	updateDisplay() 
+	updateDisplay()
 }
-if(sessionStorage.getItem("prixAmelioration")) {
+if (sessionStorage.getItem("prixAmelioration")) {
 	prixamelioration1 = parseInt(sessionStorage.getItem("prixAmelioration"));
-	updateDisplay() 
+	updateDisplay()
 }
-if(sessionStorage.getItem("nbCookiesParClick")) {
+if (sessionStorage.getItem("nbCookiesParClick")) {
 	nbCookiesParClick = parseInt(sessionStorage.getItem("nbCookiesParClick"));
-	updateDisplay() 
+	updateDisplay()
 }
 
-if(sessionStorage.getItem("nbRenaissance")) {
+if (sessionStorage.getItem("nbRenaissance")) {
 	nbRenaissance = parseInt(sessionStorage.getItem("nbRenaissance"));
-	updateDisplay() 
+	updateDisplay()
 }
-	
-if(sessionStorage.getItem("prixRenaissance1")) {
+
+if (sessionStorage.getItem("prixRenaissance1")) {
 	prixRenaissance1 = parseInt(sessionStorage.getItem("prixRenaissance1"));
-	updateDisplay() 	
+	updateDisplay()
+}
+
+if (sessionStorage.getItem("ameliorationsDebloquees")) {
+	ameliorationsDebloquees = parseInt(sessionStorage.getItem("ameliorations debloquees"));
+	updateDisplay()
 }
 
 
 
 
 function clique() {
-	cookie= cookie + Math.floor (nbCookiesParClick * multiplicateur) 
+	cookie = cookie + Math.floor(nbCookiesParClick * multiplicateur)
 	sessionStorage.setItem("cookie", cookie);
-		updateDisplay()
+	updateDisplay()
 }
 
-function updateDisplay(){ 
-	document.getElementById("btnAscension").innerHTML  = "renaissance " + nbRenaissance + " : " + prixRenaissance1 + "cookies" ;
-	document.getElementById("nb").innerHTML= "Mon nombre de cookies: "+ cookie;
-	document.getElementById("txt").innerHTML = Math.floor (nbCookiesParClick * multiplicateur) 
-	document.getElementById("bouton2").innerHTML  = "Amelioration " + nbAmelioration + " : " + prixamelioration1 + " cookies" ;
-	
+function updateDisplay() {
+	document.getElementById("btnAscension").innerHTML = "renaissance " + nbRenaissance + " : " + prixRenaissance1 + "cookies";
+	document.getElementById("nb").innerHTML = "Mon nombre de cookies: " + cookie;
+	document.getElementById("txt").innerHTML = Math.floor(nbCookiesParClick * multiplicateur)
+	document.getElementById("bouton2").innerHTML = "Amelioration " + nbAmelioration + " : " + prixamelioration1 + " cookies";
+	generateTableUpgrades()
 }
-        
+
+
 function upgrade() {
 	if (cookie >= prixamelioration1) {
-		
+
 		nbCookiesParClick = nbCookiesParClick * 2
 		nbAmelioration = nbAmelioration + 1
-		cookie= cookie - prixamelioration1
+		cookie = cookie - prixamelioration1
 		prixamelioration1 = prixamelioration1 + Math.floor(prixamelioration1 / 2)
 		sessionStorage.setItem("nbAmelioration", nbAmelioration);
 		sessionStorage.setItem("prixAmelioration", prixamelioration1);
-		document.getElementById("bouton2").innerHTML  = "Amelioration " + nbAmelioration + " : " + prixamelioration1 + " cookies" ;
+		document.getElementById("bouton2").innerHTML = "Amelioration " + nbAmelioration + " : " + prixamelioration1 + " cookies";
 		sessionStorage.setItem("nbCookiesParClick", nbCookiesParClick);
+		updateDisplay()
+
+		let tableRef = document.getElementById("tab2");
+		let newRow = tableRef.insertRow(-1);
+		let newCell = newRow.insertCell(0);
+		let newText = document.createTextNode("Amelioration  " + (nbAmelioration - 1));
+		sessionStorage.setItem("ameliorationsDebloquees", nbAmelioration - 1);
+		newCell.appendChild(newText);
 		updateDisplay()
 		return;
 	}
@@ -75,10 +90,19 @@ setInterval(function () {
 	cookie = cookie + nbCookiesParClick
 	updateDisplay()
 	sessionStorage.setItem("cookie", cookie);
-}, nbSecondes) 
+}, nbSecondes)
 
 
-
+function generateTableUpgrades() {
+	let nbRows = document.getElementById("tab2").querySelectorAll("tr").length
+	for (let i = nbRows; i < nbAmelioration; i++) {
+		let tableRef = document.getElementById("tab2");
+		let newRow = tableRef.insertRow(-1);
+		let newCell = newRow.insertCell(0);
+		let newText = document.createTextNode("Amelioration  " + i);
+		newCell.appendChild(newText);
+	}
+}
 
 
 function renaissance() {
@@ -87,8 +111,8 @@ function renaissance() {
 		nbCookiesParClick = 1
 		nbRenaissance = nbRenaissance + 1
 		cookie = 0
-		nbAmelioration = 1  
-		prixamelioration1 = 10 
+		nbAmelioration = 1
+		prixamelioration1 = 10
 		prixRenaissance1 = prixRenaissance1 * 3
 		sessionStorage.setItem("nbRenaissance", nbRenaissance);
 		sessionStorage.setItem("prixRenaissance1", prixRenaissance1);
