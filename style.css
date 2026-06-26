@@ -1,0 +1,79 @@
+#a {
+color:white;
+background-color:red;
+border-radius: 10px;
+border-color: red;
+}
+	
+#tableau, tr, th, td {
+	border: 1px solid black;
+	
+  padding: 10px;
+  text-align: center;
+
+	
+}
+
+.entête {
+	color: white;
+	background-color:#28B866 ;
+
+}
+tr:nth-child(odd) {background-color: skyblue;}
+tr:nth-child(even) {background-color: lightgrey;}
+td:hover {background-color: yellow;}
+#bouton2:hover { background-color: #066178; }
+#btnAscension:hover { background-color: #066178; }
+
+#bouton2 {
+color:white;
+background-color:skyblue;
+border-radius: 10px;
+border-color: skyblue;
+font-size: 16px;
+margin: 4px 2px;
+cursor: pointer;
+ 
+}
+#nb {
+	font-weight: bold;
+  font-family: MV boli;
+  text-align: left;
+  color : darkslategrey;
+ font-size: 20px;
+  margin: 4px 2px;
+  text-align: left
+}
+#image {
+	cursor: pointer;
+	size: 16px x 16px;
+}
+
+#txt {
+	font-weight: bold;
+  font-family: MV boli;
+  text-align: left;
+  color : darkslategrey;
+ font-size: 20px;
+  margin: 4px 2px;
+  text-align: left
+}
+#re {
+	font-weight: bold;
+  font-family: MV boli;
+  text-align: left;
+  color : darkslategrey;
+ font-size: 20px;
+  margin: 4px 2px;
+  text-align: left
+}
+
+#btnAscension {
+	color:white;
+background-color:skyblue;
+border-radius: 10px;
+border-color: skyblue;
+font-size: 16px;
+margin: 4px 2px;
+cursor: pointer;
+}
